@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nathan Zhang — Electrical Engineer</title>
+    <meta
+      name="description"
+      content="Nathan Zhang is an electrical engineering student at the University of Pennsylvania. Portfolio for hardware, firmware, and robotics internships."
+    />
+    <meta name="theme-color" content="#f4f1ea" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231f3d34'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-size='12' font-family='Georgia' fill='%23f4f1ea'%3ENZ%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,520;9..144,640&family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip" href="#projects">Skip to projects</a>
+    <header class="site-header">
+      <a class="brand" href="#top">Nathan Zhang</a>
+      <nav aria-label="Page">
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow" id="hero-school">University of Pennsylvania · Class of 2028</p>
+          <h1 id="hero-name">Nathan Zhang</h1>
+          <p class="role" id="hero-role">Electrical Engineer</p>
+          <p class="blurb" id="hero-blurb">
+            I build electrical hardware: boards, embedded firmware, and the tests that prove they work.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#projects">View projects</a>
+            <a class="btn btn-ghost" href="#contact">Get in touch</a>
+          </div>
+          <div class="social-row" id="social-row"></div>
+        </div>
+        <div class="hero-cards">
+          <article class="info-card">
+            <p class="eyebrow">Studying</p>
+            <h2 id="card-school">University of Pennsylvania</h2>
+            <p id="card-degree">BSE Electrical Engineering · Class of 2028</p>
+          </article>
+          <article class="info-card">
+            <p class="eyebrow">Open to</p>
+            <h2 id="card-open">Winter, spring, and summer 2027</h2>
+            <p id="card-seeking">Internships in electrical engineering, robotics, and mechatronics.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="projects" class="section">
+        <div class="section-head">
+          <p class="eyebrow">01 — Projects</p>
+          <h2>Selected work</h2>
+          <p class="section-lead" id="projects-lead">
+            Boards, firmware, robots, and lab setups. Each card can hold a photo, a short summary, and the tools you used.
+          </p>
+        </div>
+        <div class="project-grid" id="project-grid"></div>
+      </section>
+
+      <section id="experience" class="section">
+        <div class="section-head">
+          <p class="eyebrow">02 — Experience</p>
+          <h2>Internships and teams</h2>
+          <p class="section-lead">
+            Co-ops and research, most recent first.
+          </p>
+        </div>
+        <div class="roles" id="roles"></div>
+      </section>
+
+      <section id="about" class="section">
+        <div class="section-head">
+          <p class="eyebrow">03 — About</p>
+          <h2>Background</h2>
+        </div>
+        <div class="about-layout">
+          <div class="about-copy" id="about-copy"></div>
+          <div class="glance" id="glance"></div>
+        </div>
+        <h3 class="skills-title">Skills</h3>
+        <div class="skill-groups" id="skill-groups"></div>
+      </section>
+
+      <section id="contact" class="section">
+        <div class="section-head">
+          <p class="eyebrow">04 — Contact</p>
+          <h2>Get in touch</h2>
+          <p class="section-lead" id="contact-lead">
+            Email, LinkedIn, and GitHub show up here once they are added.
+          </p>
+        </div>
+        <div class="contact-actions" id="contact-actions"></div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Nathan Zhang · Electrical Engineering · Penn</p>
+    </footer>
+
+    <dialog id="project-dialog" aria-labelledby="dialog-title">
+      <div class="dialog-panel">
+        <button class="dialog-close" id="dialog-close" type="button">Close</button>
+        <p class="eyebrow" id="dialog-year"></p>
+        <h2 id="dialog-title"></h2>
+        <p id="dialog-summary"></p>
+        <div class="dialog-gallery" id="dialog-gallery"></div>
+        <div class="tags" id="dialog-tags"></div>
+        <ul id="dialog-highlights"></ul>
+        <div class="dialog-links" id="dialog-links"></div>
+      </div>
+    </dialog>
+
+    <script src="content.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
