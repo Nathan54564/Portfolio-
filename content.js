@@ -73,7 +73,7 @@ const SITE = {
       title: "Bionic Arm",
       year: "2026 –",
       summary:
-        "This is a mechanical arm meant to move when the wearer flexes their forearm. A band of sensors picks up the electrical signal from the muscles, a main circuit board reads those sensors, and motors in the hand close the fingers, move the thumb, or swing the arm. I am designing those circuit boards and the program that turns a muscle reading into a motor movement. The main board is built. The sensors and the hand are still being designed.",
+        "This is a mechanical arm that moves when the wearer flexes their forearm. A band of sensors picks up the electrical signal from the muscles, a main circuit board reads those sensors, and motors in the hand close the fingers, move the thumb, or swing the arm. I am designing the boards and the program that turns a muscle reading into that movement. The main board is built, and the sensors and the hand are still being designed.",
       tags: ["STM32", "EMG", "ADS1291", "Altium"],
       images: [
         {
@@ -98,18 +98,18 @@ const SITE = {
         },
       ],
       highlights: [
-        "What it does: muscle activity in the forearm is read as an electrical signal, sent to a circuit board, and used to command the hand. A contraction can close the fingers, move the thumb, or swing the arm. The pieces below are the hardware and program that perform that sequence.",
-        "Sensor modules sit around the forearm. Each one is a small rigid board with a differential pair of gold-plated electrode pads, protection diodes, a resistor-capacitor filter, and an ADS1291 converter. A hub board carries its own electrode pair and the cable junctions. Flat cable runs from the hub to the plain modules and from the hub to the main board.",
-        "The converters share one SPI bus. Each has its own chip-select line. A shared start line begins their conversions together, and a data-ready line marks each new set of samples. The main board reads the chips one after another and stores one frame of channels. Firmware on an STM32L476 is set up to run a small model on those frames.",
-        "The main board is assembled. It has two servo headers, a linear-actuator connector, a battery connector, a programming header, and the flat-cable socket. One servo closes the four fingers together. The other moves the thumb. The actuator swings the arm. The hand is modeled as a linkage driven by those two servos. The sensor boards are in layout, one version for the hub and one for the modules along the band.",
-        "Power comes from a two-cell lithium-polymer pack with its own protection circuit. A buck converter steps the pack down, a ferrite bead follows it, and a linear regulator on each board supplies the converters and the microcontroller. On the sensor boards the electrode pads are on an outer layer, with inner ground and power planes between those pads and the digital wiring.",
+        "When someone wearing the arm flexes, sensors around the forearm pick up the electrical activity of the muscle and send it to a main board, which commands the motors. A contraction can close the fingers, move the thumb, or swing the arm. The hardware and program below are what carry out that sequence.",
+        "The sensors are small rigid boards spaced around the forearm. Each one has a differential pair of gold-plated electrode pads, protection diodes, a resistor-capacitor filter, and an ADS1291 converter that turns the muscle voltage into a digital reading. A hub board has its own electrode pair and joins the cables, with flat cable running from the hub out to the other modules and back to the main board.",
+        "Those converters share one SPI bus, and each has its own chip-select line so the main board can talk to them one at a time. A shared start line begins their conversions together, and a data-ready line marks each new set of samples. The main board reads the chips in order and stores one frame of channels. Firmware on an STM32L476 is set up to run a small model on those frames.",
+        "The main board is the part that is already assembled. It has two servo headers, a connector for the linear actuator, a battery connector, a programming header, and the socket for the flat cable. One servo closes the four fingers together, the other moves the thumb, and the actuator swings the arm. The hand is modeled as a linkage driven by those two servos, and the sensor boards are still in layout, with one version for the hub and one for the modules along the band.",
+        "Power comes from a two-cell lithium-polymer pack with its own protection circuit. A buck converter steps the pack down, a ferrite bead follows it, and a linear regulator on each board supplies the converters and the microcontroller. On the sensor boards the electrode pads sit on an outer layer, with inner ground and power planes between those pads and the digital wiring.",
       ],
     },
     {
       title: "VECTOR Electromagnet Array",
       year: "Spring 2026",
       summary:
-        "This is a small physical display made of electromagnets and a magnetic liquid. Turning a coil on pulls the liquid onto that spot, so the device can draw a shape you can see. One mode shows the current time as a series of digits. The other slides a bar of liquid from one side of the grid to the other. I built the magnet plate, the electronics that switch the coils, and the program that runs the two modes.",
+        "This is a small physical display made of electromagnets and a magnetic liquid. Turning a coil on pulls the liquid onto that spot, so the device can draw a shape you can see. One mode shows the current time as a series of digits, and the other slides a bar of liquid from one side of the grid to the other. I built the magnet plate, the electronics that switch the coils, and the program that runs the two modes.",
       tags: ["ATmega328PB", "I2C", "Electromagnets", "Ferrofluid"],
       images: [
         {
@@ -124,10 +124,10 @@ const SITE = {
         },
       ],
       highlights: [
-        "What it does: magnetic liquid rests on a bed of electromagnets. Coils that are switched on pull the liquid into a visible pattern. The clock mode paints the time one character after another. The draw mode drags a stripe of liquid across the bed. The sections below are the hardware and the program that create those patterns.",
-        "The prototype is a clear case with an acrylic plate of electromagnets, a breadboard, an LCD, and a Hall sensor. Ferrofluid on the coils moves when individual magnets turn on. Time mode reads a clock chip and lights one symbol at a time: the hour, a colon, then the minutes. Draw mode turns on a full column and steps that column across the grid.",
-        "An ATmega328PB writes coil patterns over I2C to two solenoid driver boards. Those boards use port expanders, MOSFETs, and flyback diodes. The microcontroller, a DS3231 real-time clock, the LCD, and both drivers share that bus. A bench supply powers the drivers with a current limit set. The LCD shows whether the system is in time mode or draw mode, and it shows the live Hall-sensor reading.",
-        "A switch selects the mode. The firmware reads the switch in the main loop, updates the display, and applies the coil pattern. Digit shapes are stored as bitmaps and copied out to the drivers. I brought the system up as coils and drivers first, then the Hall sensor, then the clock, switch, and display, then the two modes. The first coil plate was a press fit. The coils were later screwed into threaded inserts so the faces sit on one plane. A sealed acrylic reservoir stained, so the fluid sits on the coil faces.",
+        "Magnetic liquid rests on a bed of electromagnets, and coils that are switched on pull the liquid into a pattern you can see. Clock mode paints the time one character after another, and draw mode drags a stripe of liquid across the bed. The hardware and the program below are what create those patterns.",
+        "The prototype is a clear case with an acrylic plate of electromagnets, a breadboard, an LCD, and a Hall sensor. Ferrofluid on the coils gathers on whichever magnets are on. In time mode the firmware reads a clock chip and lights one symbol at a time, first the hour, then a colon, then the minutes. In draw mode it turns on a full column and steps that column across the grid.",
+        "An ATmega328PB writes the coil patterns over I2C to two solenoid driver boards, which use port expanders, MOSFETs, and flyback diodes to switch the coils. The microcontroller, a DS3231 real-time clock, the LCD, and both drivers share that bus, and a bench supply powers the drivers with a current limit set. The LCD shows whether the system is in time mode or draw mode, along with the live Hall-sensor reading.",
+        "A switch selects the mode, and the firmware reads it in the main loop, updates the display, and applies the coil pattern. Digit shapes are stored as bitmaps and copied out to the drivers. I brought the system up as coils and drivers first, then the Hall sensor, then the clock, switch, and display, and finally the two modes. The first coil plate was a press fit, and the coils were later screwed into threaded inserts so the faces sit on one plane. A sealed acrylic reservoir stained, so the fluid sits on the coil faces.",
       ],
       links: [
         { label: "GitHub", href: "https://github.com/Nathan54564/final-project-s26-t5" },
@@ -137,7 +137,7 @@ const SITE = {
       title: "Analog Metal Detector",
       year: "Spring 2026",
       summary:
-        "This is a handheld metal detector with no computer in it. You sweep a coil at the end of a wand over a surface, and a speaker in the handle changes pitch when the coil passes over metal. I designed the circuit, simulated it, built the circuit board, wound the coil, and tested the finished wand.",
+        "This is a handheld metal detector with no computer in it. You sweep a coil at the end of a wand over a surface, and a speaker in the handle changes pitch when the coil passes over metal. I designed the circuit, simulated it, built the board, wound the coil, and tested the finished wand.",
       tags: ["LTspice", "LC oscillator", "MOSFET", "PCB"],
       images: [
         {
@@ -162,10 +162,10 @@ const SITE = {
         },
       ],
       highlights: [
-        "What it does: the round coil at the end of the wand is the sensor. Passing it over metal changes an electrical tone in the speaker at the handle. The whole signal path is analog circuitry on one board. The sections below are that circuit, how I built it, and what I measured when I brought metal up to the coil.",
-        "The detector is a wand with a hand-wound search coil at one end and a circuit board at the handle. The board holds two LC oscillators, a mixer, amplifier stages, and a speaker driver, all analog. One oscillator uses a fixed inductor. The other uses the search coil. Metal near the coil changes its inductance, that oscillator's frequency moves, and the speaker tone changes.",
-        "I drew the full circuit, simulated it in LTspice, then laid out and assembled a board with ALD MOSFET arrays, bias potentiometers, and an IRLB8721 source follower into the speaker. The two oscillator outputs are combined and passed through a nonlinear stage that produces a lower-frequency beat. On the bench the low-pass capacitors reduced that beat, so I removed them and left the later stages in the chain.",
-        "I measured both oscillators with no metal and again with metal at the coil, and compared the readings with the simulation. The reference oscillator landed close to the simulated frequency. The wound coil sat lower than its simulation, and metal shifted it in the same direction as a lower inductance in the model. The speaker, the coil, and the board are mounted as one wand. The lab report is linked on the card.",
+        "The round coil at the end of the wand is the sensor. Passing it over metal changes the tone from the speaker at the handle, and the whole signal path is analog circuitry on one board. What follows is that circuit, how I built it, and what I measured when I brought metal up to the coil.",
+        "The wand has a hand-wound search coil at one end and the circuit board at the handle. On the board are two LC oscillators, a mixer, amplifier stages, and a speaker driver. One oscillator uses a fixed inductor and the other uses the search coil, so when metal near the coil changes its inductance, that oscillator's frequency moves and the speaker tone changes with it.",
+        "I drew the full circuit, simulated it in LTspice, and then laid out and assembled a board with ALD MOSFET arrays, bias potentiometers, and an IRLB8721 source follower driving the speaker. The two oscillator outputs are combined and passed through a nonlinear stage that produces a lower-frequency beat. On the bench the low-pass capacitors reduced that beat, so I removed them and left the later stages in the chain.",
+        "I measured both oscillators with no metal and again with metal at the coil, and compared the readings with the simulation. The reference oscillator landed close to the simulated frequency. The wound coil sat lower than its simulation, and metal shifted it in the same direction as a lower inductance in the model. The speaker, the coil, and the board are mounted as one wand, and the lab report is linked on the card.",
       ],
       links: [
         { label: "Report", href: "assets/metal-detector-report.pdf" },
@@ -175,7 +175,7 @@ const SITE = {
       title: "Sift",
       year: "Spring 2026",
       summary:
-        "Sift is a desktop app for finding a file when you do not remember its name. You type a description of what you want, and the app lists matching documents and pictures from a folder, then lets you open one or ask a question about it. I built the window you interact with and the piece that starts the search program when the app opens. It won a MongoDB prize at YHack.",
+        "Sift is a desktop app for finding a file when you do not remember its name. You type a description of what you want, and it lists matching documents and pictures from a folder, then lets you open one or ask a question about it. I built the window you interact with and the piece that starts the search program when the app opens. It won a MongoDB prize at YHack.",
       tags: ["Tauri", "MongoDB Atlas", "Gemini", "FastAPI"],
       images: [
         {
@@ -185,10 +185,10 @@ const SITE = {
         },
       ],
       highlights: [
-        "What it does: you describe a file in words, and Sift searches a folder for documents and images that match the description, even when the filename does not contain those words. From the same window you can preview a result, ask a question about the file, or have the app move and sort files. The sections below are the search system and the desktop app I built around it.",
-        "Sift indexes a folder and retrieves files from a written query. PDFs, images, and text files are embedded with a Gemini model and stored in MongoDB Atlas with a vector search index. A query is embedded the same way and matched against that index. The search drops weak matches and shortens the list where the scores fall off. A separate script can ingest one file or walk a directory.",
-        "I built the desktop application in Tauri, with Rust starting the local Python server. Closed, the window is a small sprite. Open, it has chat, files, and preview tabs. Chat sends text to the assistant. The files tab lists the paths that came back. Preview shows the file you select. On launch the app waits until the server is accepting connections. File paths stay inside a configured folder.",
-        "The assistant, running on a Gemini chat model through a local API, can search the index, answer a question about selected files, and run a plan. A plan can create a folder, move a file, add a file to the index, or send a file to the trash. The plan is shown before it runs. The last plan or trash action can be undone. The project won MLH Best Use of MongoDB Atlas at YHack Spring 2026.",
+        "You describe a file in words, and Sift searches a folder for documents and images that match, even when the filename does not contain those words. From the same window you can preview a result, ask a question about the file, or have the app move and sort files. The search system and the desktop app I built around it are described below.",
+        "Sift indexes a folder and retrieves files from a written query. PDFs, images, and text files are embedded with a Gemini model and stored in MongoDB Atlas with a vector search index, and a query is embedded the same way and matched against that index. The search drops weak matches and shortens the list where the scores fall off. A separate script can ingest one file or walk a directory.",
+        "I built the desktop application in Tauri, with Rust starting the local Python server. Closed, the window is a small sprite on the screen, and open, it has chat, files, and preview tabs. Chat sends text to the assistant, the files tab lists the paths that came back, and preview shows the file you select. On launch the app waits until the server is accepting connections, and file paths stay inside a configured folder.",
+        "The assistant, running on a Gemini chat model through a local API, can search the index, answer a question about selected files, and run a plan that creates a folder, moves a file, adds a file to the index, or sends a file to the trash. The plan is shown before it runs, and the last plan or trash action can be undone. The project won MLH Best Use of MongoDB Atlas at YHack Spring 2026.",
       ],
       links: [
         { label: "GitHub", href: "https://github.com/Nathan54564/yhacks_s26_SIFT" },
@@ -200,7 +200,7 @@ const SITE = {
       title: "Connect 4 AI Player",
       year: "Sep 2025",
       summary:
-        "This is a physical Connect 4 game that plays against you. The board is a grid of colored lights in a clear box. You press a button to take your turn, a camera looks at the lights, and a small computer in the box chooses its own move and lights it up. I built the board and the program that sees the grid and picks the move. You do not need a laptop to play.",
+        "This is a physical Connect 4 game that plays against you. The board is a grid of colored lights in a clear box, and you press a button to take your turn. A camera looks at the lights, and a small computer in the box chooses its own move and lights it up. I built the board and the program that sees the grid and picks the move, so you do not need a laptop to play.",
       tags: ["ESP32", "TinyML", "CNN", "Connect 4"],
       images: [
         {
@@ -219,10 +219,10 @@ const SITE = {
         caption: "A turn on the physical board. The camera reads the LEDs, then the matrix shows the AI move.",
       },
       highlights: [
-        "What it does: two players, you and the board, take turns dropping a colored piece into a column. Your piece is a button press. The board looks at its own lights with a camera, decides a legal reply, and turns on the lights for its piece. The sections below are the physical board and the program running inside it.",
-        "The hardware is an LED matrix in a clear box, a camera on a XIAO ESP32-S3, and a row of column buttons on breadboards. The chip photographs the matrix, labels every cell empty, red, or blue, chooses a move, and lights that move on the matrix. The whole turn stays on the chip.",
-        "I collected full-board photos with that camera and cut each photo into one tile per cell, then labeled the tiles. The classifier is a small convolutional network with the weights stored as small integers so the model fits on the chip. I checked it on tiles that were held out of training. The column buttons share one analog input through a resistor ladder, and the firmware maps that reading to a column.",
-        "With the board state known, minimax with alpha-beta pruning selects the move. The search runs to a fixed depth, looks for an immediate win or block before searching, and tries the center columns first. The chosen column is written out to the LED matrix. A video of a turn on the physical board is in the project.",
+        "You and the board take turns dropping a colored piece into a column. Your turn is a button press, and the board looks at its own lights with a camera, decides a legal reply, and turns on the lights for its piece. The physical board and the program running inside it are described below.",
+        "The hardware is an LED matrix in a clear box, a camera on a XIAO ESP32-S3, and a row of column buttons on breadboards. The chip photographs the matrix, labels every cell as empty, red, or blue, chooses a move, and lights that move on the matrix, so the whole turn stays on the chip.",
+        "I collected full-board photos with that camera, cut each photo into one tile per cell, and labeled the tiles. The classifier is a small convolutional network with the weights stored as small integers so the model fits on the chip, and I checked it on tiles that were held out of training. The column buttons share one analog input through a resistor ladder, and the firmware maps that reading to a column.",
+        "Once the board state is known, minimax with alpha-beta pruning selects the move. The search runs to a fixed depth, looks for an immediate win or block before searching, and tries the center columns first. The chosen column is written out to the LED matrix, and a video of a turn on the physical board is included in the project.",
       ],
       links: [
         { label: "GitHub", href: "https://github.com/Nathan54564/Connect-4-AI-Player" },
@@ -233,7 +233,7 @@ const SITE = {
       title: "Flexible Piezoelectric Cardiovascular Sensor",
       year: "2025",
       summary:
-        "This is a thin patch that records a heartbeat from the skin. A soft film flexes with the pulse and produces a small electrical signal, and a flexible circuit board turns that into a recording you can take without sitting at a lab bench. I designed that circuit board. It was used on the wrist, the neck, and the chest, and the work was published as a first-author paper.",
+        "This is a thin patch that records a heartbeat from the skin. A soft film flexes with the pulse and produces a small electrical signal, and a flexible circuit board turns that into a recording you can take without sitting at a lab bench. I designed that board. It was used on the wrist, the neck, and the chest, and the work was published as a first-author paper.",
       tags: ["Flex PCB", "AD548", "Piezoelectric", "P(VDF-TrFE)"],
       images: [
         {
@@ -248,8 +248,8 @@ const SITE = {
         },
       ],
       highlights: [
-        "What it does: the soft film is placed on the skin and moves with the pulse. That motion becomes a small electrical signal, and the flexible board I designed amplifies it into a trace that can be recorded away from a lab bench. The sections below are the film, the board, and the recordings.",
-        "The sensor is a soft stack of silicone, carbon-nanotube electrodes, and a P(VDF-TrFE) film, with the film in the middle and the same layers repeated on the other side. The circuit is a charge amplifier on a thin polyimide board, built around an AD548. I laid out that board. It connects to the film and reads it while worn, without a separate bench amplifier. Photos show the board both flat and bent, next to the stack.",
+        "The soft film is placed on the skin and moves with the pulse. That motion becomes a small electrical signal, and the flexible board I designed amplifies it into a trace that can be recorded away from a lab bench. The film, the board, and the recordings are described below.",
+        "The sensor is a soft stack of silicone, carbon-nanotube electrodes, and a P(VDF-TrFE) film, with the film in the middle and the same layers repeated on the other side. The circuit is a charge amplifier on a thin polyimide board, built around an AD548. I laid out that board, and it connects to the film and reads it while worn, without a separate bench amplifier. Photos show the board both flat and bent, next to the stack.",
         "The film was annealed, which increased the useful crystal phase and the measured sensitivity. A long repeated-load test did not show a clear drop in the signal. Worn, the same board recorded a radial pulse at the wrist, a carotid pulse at the neck, and a chest-wall signal with the two peaks used for an augmentation index. The work is a first-author letter in ACS Applied Electronic Materials.",
       ],
       links: [
@@ -260,7 +260,7 @@ const SITE = {
       title: "Penn Aerial Robotics",
       year: "2025",
       summary:
-        "I worked out the size and shape of the flying surfaces for two student competition airplanes, using simulation rather than building the airframes myself. For one airplane I sized the wing, the tail, and the servos that move the control surfaces, for a plane that carries water and has a limited motor. For the other I sized a wing and a V-shaped tail for a plane that lifts off vertically and then flies forward, and I modeled the tail boom and compared rib designs where the wing attaches. That second airplane placed third nationally.",
+        "I worked out the size and shape of the flying surfaces for two student competition airplanes, using simulation rather than building the airframes myself. For one, I sized the wing, the tail, and the servos that move the control surfaces, for a plane that carries water and has a limited motor. For the other, I sized a wing and a V-shaped tail for a plane that lifts off vertically and then flies forward, and I modeled the tail boom and compared rib designs where the wing attaches. That second airplane placed third nationally.",
       tags: ["XFLR5", "FEA", "S1223", "NACA 4412", "SAE Aero"],
       images: [
         {
@@ -285,17 +285,17 @@ const SITE = {
         },
       ],
       highlights: [
-        "What I produced: dimensions and simulation results the airplanes were built from, not the finished aircraft. For the cargo plane, that was the wing, the tail, and the servo sizes. For the vertical-takeoff plane, that was the wing, the V-tail, a model of the tail boom, and a comparison of the ribs that attach the wing. The sections below go through those two airplanes.",
+        "What I produced was dimensions and simulation results the airplanes were built from, not the finished aircraft. For the cargo plane that was the wing, the tail, and the servo sizes, and for the vertical-takeoff plane it was the wing, the V-tail, a model of the tail boom, and a comparison of the ribs that attach the wing. The two airplanes are described below.",
         "For the smaller SAE Aero Design airplane I sized the wing, the tail, and the control-surface servos. The airplane carries a water payload under a power limit. I set a takeoff speed from the power and thrust I was using, then modeled an S1223 wing with a rectangular planform in XFLR5, along with a conventional tail. Hinge moments from that model, across a sweep of angles, were converted into a servo torque requirement with a safety factor, and the servos were selected from that requirement.",
-        "For the three-motor airplane I sized a cruise wing, a V-tail, and the tail boom. The wing is a tapered NACA 4412 with washout. In XFLR5 I compared that wing with a plain rectangle and ran a stability check. I set the tail arm, the tail area, and the angle between the two tail surfaces in the same model. The boom is a CAD model: a carbon tube, servo housings, and the tail surface. That airplane placed third nationally.",
-        "I also ran finite-element analysis on three shapes for the ribs that join the wing to the body. For each rib I recorded peak stress, factor of safety, and mass under the same load case.",
+        "For the three-motor airplane I sized a cruise wing, a V-tail, and the tail boom. The wing is a tapered NACA 4412 with washout. In XFLR5 I compared that wing with a plain rectangle and ran a stability check, and I set the tail arm, the tail area, and the angle between the two tail surfaces in the same model. The boom is a CAD model of a carbon tube, servo housings, and the tail surface, and that airplane placed third nationally.",
+        "I also ran finite-element analysis on three shapes for the ribs that join the wing to the body, and for each rib I recorded peak stress, factor of safety, and mass under the same load case.",
       ],
     },
     {
       title: "Three-Base Truss ROS Simulation",
       year: "2025",
       summary:
-        "This is a simulation of three small robots linked into a triangle. The links between them grow and shrink on a timer, and the triangle stretches and changes shape on screen. I wrote the simulation and checked that the picture matches a graph of the three link lengths, with Professor Cynthia Sung.",
+        "This is a simulation of three small robots linked into a triangle. The links between them grow and shrink on a timer, so the triangle stretches and changes shape on screen. I wrote the simulation and checked that the picture matches a graph of the three link lengths, with Professor Cynthia Sung.",
       tags: ["ROS", "Simulation", "Truss", "Python"],
       images: [
         {
@@ -310,9 +310,9 @@ const SITE = {
         },
       ],
       highlights: [
-        "What it does: three robot bases stay linked while the arms between them extend and retract on a schedule. The triangle on screen changes shape for as long as the simulation runs. A graph next to it shows the length of each arm over time. I wrote this simulation and checked the picture against the graph with Professor Cynthia Sung.",
-        "The simulation places three mobile bases at the corners of a triangle, with an extendable arm on each side, labeled AB, BC, and CA. Each arm length follows a sine wave, and the three waves are shifted in phase, so the triangle changes shape as the simulation runs. A ROS node, chrono_triangle_sim_node, prints every arm length at each timestep.",
-        "I plotted those logs. The three traces stay out of phase and remain near the starting length. I compared the plot with the 3D view of the bases and the red links, with Professor Cynthia Sung. The view shows the bases and arms moving in line with the logged lengths.",
+        "Three robot bases stay linked while the arms between them extend and retract on a schedule, so the triangle on screen changes shape for as long as the simulation runs. A graph next to it shows the length of each arm over time. I wrote this simulation and checked the picture against the graph with Professor Cynthia Sung.",
+        "The simulation places three mobile bases at the corners of a triangle, with an extendable arm on each side, labeled AB, BC, and CA. Each arm length follows a sine wave, and the three waves are shifted in phase, which is what makes the triangle change shape as the simulation runs. A ROS node, chrono_triangle_sim_node, prints every arm length at each timestep.",
+        "I plotted those logs, and the three traces stay out of phase and remain near the starting length. Comparing the plot with the 3D view of the bases and the red links, with Professor Cynthia Sung, showed the bases and arms moving in line with the logged lengths.",
       ],
       links: [
         { label: "GitHub", href: "https://github.com/Nathan54564/nathan_TRUSSES" },
@@ -347,16 +347,16 @@ const SITE = {
         },
       ],
       highlights: [
-        "What it does: the box makes sound, or a signal you can send to other music gear, from knobs on the lid. One output is a sawtooth wave, the bright buzzy tone. The other is a pulse wave, a hollower tone whose shape you set with a knob. Pitch is two knobs, coarse and fine. The sections below are the circuit inside the box and the printed case.",
-        "The synthesizer is one analog board with a sawtooth output and a pulse output, running from positive and negative supply rails. Coarse and fine knobs set the pitch. Another control sets the pulse width. Jacks accept external voltages for pitch and for pulse width. The two waveforms leave on separate jacks. A temperature-compensation network sits on the oscillator core, and a buffer follows the core into the pulse-width stage.",
-        "I started from a published oscillator schematic, then drew the full schematic in Altium, laid out the board, and wired the panel potentiometers, switches, and LED to it. The enclosure was modeled in SolidWorks and printed in purple. The knobs are on the top face. The board is mounted inside the housing. A rendered version of the case shows the same knob layout and a row of jacks on the side.",
+        "The box makes a signal you can hear or send to other music gear, controlled by knobs on the lid. One output is a sawtooth wave, the bright buzzy tone, and the other is a pulse wave, a hollower tone whose shape you set with a knob. Pitch is set with two knobs, coarse and fine. The circuit inside the box and the printed case are described below.",
+        "The synthesizer is one analog board with a sawtooth output and a pulse output, running from positive and negative supply rails. Coarse and fine knobs set the pitch, another control sets the pulse width, and jacks accept external voltages for both. The two waveforms leave on separate jacks. A temperature-compensation network sits on the oscillator core, and a buffer follows the core into the pulse-width stage.",
+        "I started from a published oscillator schematic, then drew the full schematic in Altium, laid out the board, and wired the panel potentiometers, switches, and LED to it. The enclosure was modeled in SolidWorks and printed in purple, with the knobs on the top face and the board mounted inside. A rendered version of the case shows the same knob layout and a row of jacks on the side.",
       ],
     },
     {
       title: "Maze Game",
       year: "Dec 2024",
       summary:
-        "This is a maze game on the computer. Each time you start, it draws a brand-new maze. You move a square with the arrow keys, dodge enemies that pace back and forth and tiles that knock you out, and you can stand on a checkpoint so a death does not send you back to the entrance. The screen keeps score with deaths and time. I wrote the maze generator and the game.",
+        "This is a maze game on the computer that draws a new maze every time you start. You move a square with the arrow keys, dodge enemies that pace back and forth and tiles that knock you out, and you can stand on a checkpoint so a death does not send you back to the entrance. The screen keeps score with deaths and time. I wrote the maze generator and the game.",
       tags: ["Java", "Swing", "Maven"],
       images: [
         {
@@ -371,9 +371,9 @@ const SITE = {
         },
       ],
       highlights: [
-        "What it does: starting the program creates a maze, shows a short instruction page, then lets you walk a square through the corridors. Enemies pace in the halls, some floor tiles are hazards, white tiles are checkpoints, and a checkered tile is the exit. Deaths and time stay on screen. I wrote both the generator that draws the maze and the game you play.",
+        "Starting the program creates a maze, shows a short instruction page, and then lets you walk a square through the corridors. Enemies pace in the halls, some floor tiles are hazards, white tiles are checkpoints, and a checkered tile is the exit, with deaths and time kept on screen. I wrote both the generator that draws the maze and the game you play.",
         "The game builds a new maze at startup. A stack-based recursive backtracker starts on a cell, steps to an unvisited neighbor, removes the wall between them, and backtracks when a cell has nowhere new to go. The finished maze connects every open cell, and it has no loops. The generator lives in its own Java class and runs before the play screen appears.",
-        "Arrow keys move a yellow square. Green blocks patrol in a straight line and reverse when they hit something. Touching one sends the player to the last white save block that was activated. Red tiles end the current life, and some of them blink on and off. A checkered tile ends the run. The window opens on an instructions card, then switches to the maze. A side panel counts deaths and elapsed time.",
+        "Arrow keys move a yellow square, and green blocks patrol in a straight line and reverse when they hit something. Touching one sends the player to the last white save block that was activated. Red tiles end the current life, and some of them blink on and off, while a checkered tile ends the run. The window opens on an instructions card and then switches to the maze, where a side panel counts deaths and elapsed time.",
       ],
       links: [
         { label: "GitHub", href: "https://github.com/Nathan54564/Maze_Game" },
@@ -408,9 +408,9 @@ const SITE = {
         },
       ],
       highlights: [
-        "What it does: you wear it and perform compressions. It listens to how fast you are going and how hard you are pushing, compares that with the rhythm from a speaker, and tells you harder, lighter, slower, or faster. The message is on a small screen strapped to the wrist and on a phone dashboard. I built the glove electronics and the cuff.",
-        "The glove measures compression rate and force during CPR practice. An MPU6050 on the hand registers each compression from the motion, and the time between compressions is displayed as a rate. A force-sensitive resistor reads how hard the push is. A speaker plays a metronome. An LCD on the cuff reports force as harder, lighter, or good, and pace as slow, fast, or good. Those are two separate messages.",
-        "An ESP32 sends rate, force, and alerts to a Blynk page on a phone. The LCD and the metronome keep running if that link is down. I drew the cuff in SolidWorks, printed it, and added Velcro. The circuit, including the accelerometer, force sensor, speaker, and display, was soldered into the cuff and a work glove.",
+        "You wear the glove and perform compressions, and it follows how fast you are going and how hard you are pushing, compares that with the rhythm from a speaker, and tells you harder, lighter, slower, or faster. The message shows up on a small screen strapped to the wrist and on a phone dashboard. I built the glove electronics and the cuff.",
+        "An MPU6050 on the hand registers each compression from the motion, and the time between compressions is displayed as a rate. A force-sensitive resistor reads how hard the push is, a speaker plays the metronome, and an LCD on the cuff reports force as harder, lighter, or good, and pace as slow, fast, or good, as two separate messages.",
+        "An ESP32 sends the rate, force, and alerts to a Blynk page on a phone, while the LCD and the metronome keep running if that link is down. I drew the cuff in SolidWorks, printed it, and added Velcro, then soldered the accelerometer, force sensor, speaker, and display into the cuff and a work glove.",
       ],
       links: [
         { label: "GitHub", href: "https://github.com/Nathan54564/ESE-1110-" },
@@ -420,7 +420,7 @@ const SITE = {
       title: "Biosignal Whack-a-Mole",
       year: "2024",
       summary:
-        "This is a Whack-a-Mole game you play with your body instead of a keyboard. Moles appear on a grid on the screen. Flexing your forearm swings the hammer, and tapping one of four pads moves the hammer to another hole. I built the pads, connected the muscle sensor and the pads to the game, and ran it as a demo.",
+        "This is a Whack-a-Mole game you play with your body instead of a keyboard. Moles appear on a grid on the screen, flexing your forearm swings the hammer, and tapping one of four pads moves the hammer to another hole. I built the pads, connected the muscle sensor and the pads to the game, and ran it as a demo.",
       tags: ["Arduino", "Unity", "EMG", "TENG", "AD620"],
       images: [
         {
@@ -435,9 +435,9 @@ const SITE = {
         },
       ],
       highlights: [
-        "What it does: it is a normal Whack-a-Mole round on a computer, with a timer and a score, except the controls are on your body. A sensor on the forearm reads a muscle contraction and that swing hits the mole. Four pads on the table, one for each direction, move you between holes. I built the pads and wired both inputs into the game.",
-        "The Unity scene is a timed Whack-a-Mole round on a grid of holes. The hammer swings, plays a sound, and scores when it hits a mole. A countdown ends the round and the game waits for a restart. A forearm EMG signal comes in from an Arduino on a serial port. Crossing a threshold swings the hammer, which is also what the space bar does.",
-        "Four pads made from carbon tape on PET and nylon are labeled up, down, left, and right. A tap steps the hammer across the grid. The pad voltage goes through an AD620 before it is read. I measured taps on those pads on the bench. Before this scene, the same EMG reading was sent into Unity as a force on a block, and a separate glove test used an ultrasound sensor with a vibration cue when the hand got too close.",
+        "It is a normal Whack-a-Mole round on a computer, with a timer and a score, except the controls are on your body. A sensor on the forearm reads a muscle contraction and that swing hits the mole, while four pads on the table, one for each direction, move you between holes. I built the pads and wired both inputs into the game.",
+        "The hammer swings, plays a sound, and scores when it hits a mole. A countdown ends the round and the game waits for a restart. The forearm EMG signal comes in from an Arduino on a serial port, and crossing a threshold swings the hammer, which is the same action as the space bar.",
+        "The four pads are made from carbon tape on PET and nylon and labeled up, down, left, and right, and a tap steps the hammer across the grid. The pad voltage goes through an AD620 before it is read, and I measured taps on those pads on the bench. Before this scene, the same EMG reading was sent into Unity as a force on a block, and a separate glove test used an ultrasound sensor with a vibration cue when the hand got too close.",
       ],
       links: [
         { label: "GitHub", href: "https://github.com/Nathan54564/WHACK-A-MOLE" },
