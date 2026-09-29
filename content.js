@@ -292,7 +292,7 @@ const SITE = {
       ],
     },
     {
-      title: "Three-Base Truss Simulation",
+      title: "Three-Base Truss ROS Simulation",
       year: "2025",
       summary:
         "This is a simulation of three small robots linked into a triangle. The links between them grow and shrink on a timer, and the triangle stretches and changes shape on screen. I wrote the simulation and checked that the picture matches a graph of the three link lengths, with Professor Cynthia Sung.",
