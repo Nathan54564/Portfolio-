@@ -260,7 +260,7 @@ const SITE = {
       title: "Penn Aerial Robotics",
       year: "2025",
       summary:
-        "I worked out the size and shape of the flying surfaces for two student competition airplanes, using simulation rather than building the airframes myself. For one, I sized the wing, the tail, and the servos that move the control surfaces, for a plane that carries water and has a limited motor. For the other, I sized a wing and a V-shaped tail for a plane that lifts off vertically and then flies forward, and I modeled the tail boom and compared rib designs where the wing attaches. That second airplane placed third nationally.",
+        "I worked out the size and shape of the flying surfaces for two student competition airplanes in simulation. For one, I sized the wing, the tail, and the servos that move the control surfaces, for a plane that carries water and has a limited motor. For the other, I sized a wing and a V-shaped tail for a plane that lifts off vertically and then flies forward, and I modeled the tail boom and compared rib designs where the wing attaches. That second airplane placed third nationally.",
       tags: ["XFLR5", "FEA", "S1223", "NACA 4412", "SAE Aero"],
       images: [
         {
@@ -285,7 +285,7 @@ const SITE = {
         },
       ],
       highlights: [
-        "What I produced was dimensions and simulation results the airplanes were built from, not the finished aircraft. For the cargo plane that was the wing, the tail, and the servo sizes, and for the vertical-takeoff plane it was the wing, the V-tail, a model of the tail boom, and a comparison of the ribs that attach the wing. The two airplanes are described below.",
+        "I produced the dimensions and simulation results for both airplanes. For the cargo plane that was the wing, the tail, and the servo sizes, and for the vertical-takeoff plane it was the wing, the V-tail, a model of the tail boom, and a comparison of the ribs that attach the wing. The two airplanes are described below.",
         "For the smaller SAE Aero Design airplane I sized the wing, the tail, and the control-surface servos. The airplane carries a water payload under a power limit. I set a takeoff speed from the power and thrust I was using, then modeled an S1223 wing with a rectangular planform in XFLR5, along with a conventional tail. Hinge moments from that model, across a sweep of angles, were converted into a servo torque requirement with a safety factor, and the servos were selected from that requirement.",
         "For the three-motor airplane I sized a cruise wing, a V-tail, and the tail boom. The wing is a tapered NACA 4412 with washout. In XFLR5 I compared that wing with a plain rectangle and ran a stability check, and I set the tail arm, the tail area, and the angle between the two tail surfaces in the same model. The boom is a CAD model of a carbon tube, servo housings, and the tail surface, and that airplane placed third nationally.",
         "I also ran finite-element analysis on three shapes for the ribs that join the wing to the body, and for each rib I recorded peak stress, factor of safety, and mass under the same load case.",
